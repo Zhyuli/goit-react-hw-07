@@ -1,10 +1,12 @@
 import { FiPhone, FiUser } from "react-icons/fi";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContact } from "../../redux/operations";
 
-const ContactListItem = ({ contact: { id, name, number } }) => {
+const ContactListItem = ({ contact: { id, name, phone } }) => {
   const dispatch = useDispatch();
+
+  const handleDelete = () => dispatch(deleteContact(id));
 
   return (
     <div className={css.itemBox}>
@@ -16,10 +18,10 @@ const ContactListItem = ({ contact: { id, name, number } }) => {
         <p className={css.number}>
           {" "}
           <FiPhone className={css.svg} />
-          {number}
+          {phone}
         </p>
       </div>
-      <button className={css.btn} onClick={() => dispatch(deleteContact(id))}>
+      <button className={css.btn} onClick={handleDelete}>
         Delete
       </button>
     </div>
